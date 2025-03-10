@@ -32,8 +32,8 @@ import com.banco.jwt.repository.UserRepository;
 import com.banco.jwt.security.jwt.JwtUtils;
 import com.banco.jwt.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
 public class AuthController {
   @Autowired
@@ -51,6 +51,7 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+  @CrossOrigin(origins = "http://localhost:4200")
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -72,6 +73,7 @@ public class AuthController {
                          roles));
   }
 
+  @CrossOrigin(origins = "http://localhost:4200")
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {

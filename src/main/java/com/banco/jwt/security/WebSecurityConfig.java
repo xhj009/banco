@@ -22,6 +22,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.banco.jwt.security.jwt.AuthEntryPointJwt;
 import com.banco.jwt.security.jwt.AuthTokenFilter;
 import com.banco.jwt.security.services.UserDetailsServiceImpl;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 //@EnableMethodSecurity
@@ -85,22 +95,47 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 //
 //    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 //  }
-  //authorizeHttpRequests
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
+    http.csrf(csrf -> csrf.disable() )
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth ->
-          auth.requestMatchers("/api/auth/**").permitAll()
+                                        //api/auth/
+          auth.requestMatchers("**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
               .anyRequest().authenticated()
         );
+            //.httpBasic(AbstractHttpConfigurer::disable);
 
+
+    http.cors(value -> value.configurationSource(corsConfigurationSource()));
     http.authenticationProvider(authenticationProvider());
-
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     
     return http.build();
   }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+    configuration.setAllowedMethods(Arrays.asList("*"));
+    configuration.setAllowedHeaders(Arrays.asList("*"));
+    configuration.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
+
+//  private CorsConfigurationSource corsConfigurationSource() {
+//    var source = new UrlBasedCorsConfigurationSource();
+//    var configuration = new CorsConfiguration();
+//    configuration.setAllowedOrigins(List.of("*"));
+//    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+//    configuration.setAllowedHeaders(List.of("*"));
+//    configuration.setAllowCredentials(true);
+//    return source;
+//  }
 }
