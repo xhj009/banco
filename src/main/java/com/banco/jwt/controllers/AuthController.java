@@ -73,7 +73,7 @@ public class AuthController {
                          roles));
   }
 
-  @CrossOrigin(origins = "http://localhost:4200")
+
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
