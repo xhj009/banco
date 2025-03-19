@@ -1,5 +1,6 @@
 package com.banco.controller;
 
+import com.banco.dto.CuentaDto;
 import com.banco.entity.Cuenta;
 import com.banco.service.CuentaService;
 import org.apache.coyote.Response;
@@ -14,35 +15,35 @@ import java.util.Map;
 @RequestMapping("/api/cuenta")
 public class CuentaController {
     @Autowired
-    CuentaService cuentaService;
+    private CuentaService cuentaService;
 
     @GetMapping("")
-    public List<Cuenta> getAll(){
+    public List<CuentaDto> getAll(){
        return cuentaService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cuenta> findById(@PathVariable Integer id){
+    public ResponseEntity<CuentaDto> findById(@PathVariable Integer id){
         return cuentaService.findById(id);
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Cuenta> save(@RequestBody Cuenta cuenta){
+    public ResponseEntity<CuentaDto> save(@RequestBody CuentaDto cuenta){
         return cuentaService.save(cuenta);
     }
 
     @PutMapping("/depositar/{id}")
-    public ResponseEntity<Cuenta> depositar(@PathVariable Integer id, @RequestBody Cuenta cuenta){
+    public ResponseEntity<CuentaDto> depositar(@PathVariable Integer id, @RequestBody CuentaDto cuenta){
         return cuentaService.deposito(id,cuenta.getCantidad());
     }
 
     @PutMapping("/retirar/{id}")
-    public ResponseEntity<Cuenta> retirar(@PathVariable Integer id,@RequestBody Cuenta cuenta){
+    public ResponseEntity<CuentaDto> retirar(@PathVariable Integer id,@RequestBody CuentaDto cuenta){
         return cuentaService.retirar(id,cuenta.getCantidad());
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Cuenta> delete(@PathVariable Integer id){
+    public ResponseEntity<CuentaDto> delete(@PathVariable Integer id){
         return cuentaService.delete(id);
     }
 }

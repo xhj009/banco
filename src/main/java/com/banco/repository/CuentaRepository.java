@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CuentaRepository extends JpaRepository<Cuenta,Integer> {
 
-    //Cuenta deposito (Integer id,Double cantidad);
 
 }

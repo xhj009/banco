@@ -1,5 +1,6 @@
 package com.banco.service;
 
+import com.banco.dto.CuentaDto;
 import com.banco.entity.Cuenta;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,17 +13,17 @@ import java.util.Optional;
 @Service
 public interface CuentaService {
 
-    List<Cuenta> findAll();
+    List<CuentaDto> findAll();
 
-    ResponseEntity<Cuenta> findById(@PathVariable Integer id);
+    ResponseEntity<CuentaDto> findById(@PathVariable Integer id);
 
-    ResponseEntity<Cuenta> save(@RequestBody Cuenta cuenta);
+    ResponseEntity<CuentaDto> save(@RequestBody CuentaDto cuenta);
 
-    ResponseEntity<Cuenta> deposito(@PathVariable Integer id, @RequestBody Double cantidad);
+    ResponseEntity<CuentaDto> deposito(@PathVariable Integer id, @RequestBody Double cantidad);
 
-    ResponseEntity<Cuenta> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
+    ResponseEntity<CuentaDto> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
 
     ResponseEntity<Cuenta> update(@PathVariable Integer id ,@RequestBody Cuenta cuenta);
 
-    ResponseEntity<Cuenta> delete(@PathVariable Integer id);
+    ResponseEntity<CuentaDto> delete(@PathVariable Integer id);
 }

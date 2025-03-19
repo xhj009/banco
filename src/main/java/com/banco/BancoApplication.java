@@ -14,6 +14,8 @@ public class BancoApplication {
 
 	}
 
+
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
