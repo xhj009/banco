@@ -1,5 +1,6 @@
 package com.banco.controller;
 
+import com.banco.dto.ClienteDTO;
 import com.banco.entity.Cliente;
 import com.banco.service.ClienteService;
 import org.apache.coyote.Response;
@@ -26,12 +27,12 @@ public class ClienteController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente){
+    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO cliente){
         return clienteService.create(cliente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> update (@PathVariable Integer id, @RequestBody Cliente cliente){
+    public ResponseEntity<ClienteDTO> update (@PathVariable Integer id, @RequestBody ClienteDTO cliente){
         return clienteService.update(id,cliente);
     }
 

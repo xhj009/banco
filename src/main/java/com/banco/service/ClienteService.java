@@ -1,5 +1,6 @@
 package com.banco.service;
 
+import com.banco.dto.ClienteDTO;
 import com.banco.entity.Cliente;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +14,9 @@ public interface ClienteService {
     
     ResponseEntity<Cliente> findById(@PathVariable Integer id);
 
-    ResponseEntity<Cliente> create(@RequestBody Cliente cliente);
+    ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO cliente);
 
-    ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody Cliente cliente);
+    ResponseEntity<ClienteDTO> update(@PathVariable Integer id, @RequestBody ClienteDTO cliente);
 
     ResponseEntity<Cliente> delete(@PathVariable Integer id);
 }

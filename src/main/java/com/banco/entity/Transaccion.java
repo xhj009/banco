@@ -2,6 +2,7 @@ package com.banco.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,16 +14,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cuenta {
+public class Transaccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String numeroCuenta;
-    private double cantidad;
+    @ManyToMany(targetEntity = Cuenta.class)
+    private List<Cuenta> cuentaOrigen;
+    private String cuentaDestino;
+    private Double cantidad;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime fechaCreacion;
-    @ManyToOne(targetEntity = Cliente.class)
-    private Cliente cliente;
-    @ManyToMany(targetEntity = Transaccion.class)
-    private List<Transaccion> transacciones;
+    private LocalDateTime fecha;
 }

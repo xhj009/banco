@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CuentaRepository extends JpaRepository<Cuenta,Integer> {
-
+    Boolean existsBynumeroCuenta(String numeroCuenta);
+    Cuenta findBynumeroCuenta(String numeroCuenta);
 
 }
