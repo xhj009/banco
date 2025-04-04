@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,12 +28,12 @@ public class ClienteController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO cliente){
+    public ResponseEntity<ClienteDTO> create(@Valid @RequestBody ClienteDTO cliente){
         return clienteService.create(cliente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteDTO> update (@PathVariable Integer id, @RequestBody ClienteDTO cliente){
+    public ResponseEntity<ClienteDTO> update (@PathVariable Integer id, @Valid @RequestBody ClienteDTO cliente){
         return clienteService.update(id,cliente);
     }
 
