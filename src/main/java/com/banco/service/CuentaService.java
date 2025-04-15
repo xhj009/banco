@@ -18,11 +18,11 @@ public interface CuentaService {
 
     ResponseEntity<CuentaDTO> save(@RequestBody CuentaDTO cuenta);
 
-    ResponseEntity<CuentaDTO> deposito(@PathVariable Integer id, @RequestBody Double cantidad);
+    //ResponseEntity<CuentaDTO> deposito(@PathVariable Integer id, @RequestBody Double cantidad);
 
-    ResponseEntity<CuentaDTO> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
+   // ResponseEntity<CuentaDTO> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
 
-    ResponseEntity<Cuenta> update(@PathVariable Integer id ,@RequestBody Cuenta cuenta);
+    //ResponseEntity<Cuenta> update(@PathVariable Integer id ,@RequestBody Cuenta cuenta);
 
-    ResponseEntity<CuentaDTO> delete(@PathVariable Integer id);
+    //ResponseEntity<CuentaDTO> delete(@PathVariable Integer id);
 }

@@ -25,23 +25,23 @@ public class CuentaController {
         return cuentaService.findById(id);
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity<CuentaDTO> save(@Valid @RequestBody CuentaDTO cuenta){
-        return cuentaService.save(cuenta);
-    }
+//    @PostMapping("/crear")
+//    public ResponseEntity<CuentaDTO> save(@Valid @RequestBody CuentaDTO cuenta){
+//        return cuentaService.save(cuenta);
+//    }
+//
+//    @PutMapping("/depositar/{id}")
+//    public ResponseEntity<CuentaDTO> depositar(@PathVariable Integer id,@Valid @RequestBody CuentaDTO cuenta){
+//        return cuentaService.deposito(id,cuenta.getCantidad());
+//    }
 
-    @PutMapping("/depositar/{id}")
-    public ResponseEntity<CuentaDTO> depositar(@PathVariable Integer id,@Valid @RequestBody CuentaDTO cuenta){
-        return cuentaService.deposito(id,cuenta.getCantidad());
-    }
+//    @PutMapping("/retirar/{id}")
+//    public ResponseEntity<CuentaDTO> retirar(@PathVariable Integer id,@Valid @RequestBody CuentaDTO cuenta){
+//        return cuentaService.retirar(id,cuenta.getCantidad());
+//    }
 
-    @PutMapping("/retirar/{id}")
-    public ResponseEntity<CuentaDTO> retirar(@PathVariable Integer id,@Valid @RequestBody CuentaDTO cuenta){
-        return cuentaService.retirar(id,cuenta.getCantidad());
-    }
-
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<CuentaDTO> delete(@PathVariable Integer id){
-        return cuentaService.delete(id);
-    }
+//    @DeleteMapping("delete/{id}")
+//    public ResponseEntity<CuentaDTO> delete(@PathVariable Integer id){
+//        return cuentaService.delete(id);
+//    }
 }

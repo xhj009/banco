@@ -76,55 +76,55 @@ public class CuentaServiceImpl implements CuentaService {
         return ResponseEntity.ok(dto);
     }
 
-    @Override
-    public ResponseEntity<CuentaDTO> deposito(Integer id, Double cantidad) {
-        //Cuenta cuenta1 = cuentaRepository.findById(id).orElseThrow(() -> new RuntimeException("La cuenta no existe"));
-        Cuenta cuenta1 = cuentaRepository.findByUsuarioAndId(obtenerUsuario.usuario(),id);
-        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
-        if (!existe) {
-            return new ResponseEntity(new Mensaje("No existe la cuenta por el usuario"), HttpStatus.BAD_REQUEST);
-        }
-        double total = cuenta1.getCantidad() + cantidad;
-        cuenta1.setCantidad(total);
-        cuentaRepository.save(cuenta1);
-        CuentaDTO dto = modelMapper.map(cuenta1, CuentaDTO.class);
-        return ResponseEntity.ok(dto);
-    }
-    //Cliente cliente = clienteRepository.searchById((cuenta.getCliente_id()));
-    @Override
-    public ResponseEntity<CuentaDTO> retirar(Integer id, Double cantidad) {
-        //Cuenta cuenta1 = cuentaRepository.findById(id).get();
-        Cuenta cuenta1 = cuentaRepository.findByUsuarioAndId(obtenerUsuario.usuario(),id);
-        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
-        if (!existe) {
-            return new ResponseEntity(new Mensaje("No existe la cuenta por el usuario"), HttpStatus.BAD_REQUEST);
-        }
-        cuenta1.setCantidad(cuenta1.getCantidad() - cantidad);
-        cuentaRepository.save(cuenta1);
-        CuentaDTO dto = modelMapper.map(cuenta1, CuentaDTO.class);
-        return ResponseEntity.ok(dto);
-    }
+//    @Override
+//    public ResponseEntity<CuentaDTO> deposito(Integer id, Double cantidad) {
+//        //Cuenta cuenta1 = cuentaRepository.findById(id).orElseThrow(() -> new RuntimeException("La cuenta no existe"));
+//        Cuenta cuenta1 = cuentaRepository.findByUsuarioAndId(obtenerUsuario.usuario(),id);
+//        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
+//        if (!existe) {
+//            return new ResponseEntity(new Mensaje("No existe la cuenta por el usuario"), HttpStatus.BAD_REQUEST);
+//        }
+//        double total = cuenta1.getCantidad() + cantidad;
+//        cuenta1.setCantidad(total);
+//        cuentaRepository.save(cuenta1);
+//        CuentaDTO dto = modelMapper.map(cuenta1, CuentaDTO.class);
+//        return ResponseEntity.ok(dto);
+//    }
+//    //Cliente cliente = clienteRepository.searchById((cuenta.getCliente_id()));
+//    @Override
+//    public ResponseEntity<CuentaDTO> retirar(Integer id, Double cantidad) {
+//        //Cuenta cuenta1 = cuentaRepository.findById(id).get();
+//        Cuenta cuenta1 = cuentaRepository.findByUsuarioAndId(obtenerUsuario.usuario(),id);
+//        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
+//        if (!existe) {
+//            return new ResponseEntity(new Mensaje("No existe la cuenta por el usuario"), HttpStatus.BAD_REQUEST);
+//        }
+//        cuenta1.setCantidad(cuenta1.getCantidad() - cantidad);
+//        cuentaRepository.save(cuenta1);
+//        CuentaDTO dto = modelMapper.map(cuenta1, CuentaDTO.class);
+//        return ResponseEntity.ok(dto);
+//    }
 
 
-    @Override
-    public ResponseEntity<Cuenta> update(Integer id, Cuenta cuenta) {
-        Cuenta cuent = cuentaRepository.findById(id).get();
-        cuent.setNumeroCuenta(cuenta.getNumeroCuenta());
-        //cuent.setCantidad(cuenta.getCantidad());
-        LocalDateTime fecha = LocalDateTime.now();
-        cuent.setFechaCreacion(fecha);
-        cuentaRepository.save(cuent);
-        return ResponseEntity.ok(cuent);
-    }
+//    @Override
+//    public ResponseEntity<Cuenta> update(Integer id, Cuenta cuenta) {
+//        Cuenta cuent = cuentaRepository.findById(id).get();
+//        cuent.setNumeroCuenta(cuenta.getNumeroCuenta());
+//        //cuent.setCantidad(cuenta.getCantidad());
+//        LocalDateTime fecha = LocalDateTime.now();
+//        cuent.setFechaCreacion(fecha);
+//        cuentaRepository.save(cuent);
+//        return ResponseEntity.ok(cuent);
+//    }
 
-    @Override
-    public ResponseEntity<CuentaDTO> delete(Integer id) {
-        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
-
-        if (!existe){
-            return new ResponseEntity(new Mensaje("La cuenta que quieres eliminar no existe"),HttpStatus.NOT_FOUND);
-        }
-        cuentaRepository.deleteById(id);
-        return new ResponseEntity(new Mensaje("La cuenta ha sido eliminada existosamente "),HttpStatus.OK);
-    }
+//    @Override
+//    public ResponseEntity<CuentaDTO> delete(Integer id) {
+//        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
+//
+//        if (!existe){
+//            return new ResponseEntity(new Mensaje("La cuenta que quieres eliminar no existe"),HttpStatus.NOT_FOUND);
+//        }
+//        cuentaRepository.deleteById(id);
+//        return new ResponseEntity(new Mensaje("La cuenta ha sido eliminada existosamente "),HttpStatus.OK);
+//    }
 }
