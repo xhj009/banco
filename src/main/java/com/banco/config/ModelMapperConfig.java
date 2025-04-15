@@ -21,14 +21,14 @@ public class ModelMapperConfig {
         ModelMapper modelMapper = new ModelMapper();
 
         TypeMap<Cuenta, CuentaDTO> propertyMapper = modelMapper.createTypeMap(Cuenta.class, CuentaDTO.class);
-        propertyMapper.addMapping(Cuenta::getCliente, CuentaDTO::setCliente_id);
-        propertyMapper.addMapping(src -> src.getCliente().getId(), CuentaDTO::setCliente_id);
+        //propertyMapper.addMapping(Cuenta::getCliente, CuentaDTO::setCliente_id);
+        //propertyMapper.addMapping(src -> src.getCliente().getId(), CuentaDTO::setCliente_id);
 
-        modelMapper.createTypeMap(Transaccion.class, TransaccionDTO.class)
-                .addMappings(mapper -> {
-                    mapper.using(new ListCuentaToStringConverter())
-                            .map(Transaccion::getCuentaOrigen, TransaccionDTO::setCuentaOrigen);
-                });
+//        modelMapper.createTypeMap(Transaccion.class, TransaccionDTO.class)
+//                .addMappings(mapper -> {
+//                    mapper.using(new ListCuentaToStringConverter())
+//                            .map(Transaccion::getCuentaOrigen, TransaccionDTO::setCuentaOrigen);
+//                });
 
 
         return modelMapper;

@@ -103,9 +103,13 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth ->
                                         //api/auth/
-          auth.requestMatchers("**").permitAll()
+          auth.requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
-              .anyRequest().authenticated()
+              .requestMatchers("/api/transaccion/**").permitAll()
+                  //.authenticated()
+              //.anyRequest().authenticated()
+                  .anyRequest().permitAll()
+
         );
             //.httpBasic(AbstractHttpConfigurer::disable);
 

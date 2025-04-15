@@ -8,13 +8,14 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class CuentaDTO {
+public class TransaccionMovimientoDTO {
     private Integer id;
-    private String numeroCuenta;
+    @NotEmpty(message = "cuentaOrigen no puede estar vacio")
+    private String cuentaOrigen;
     @Min(0)
-    private double cantidad;
+    private Double cantidad;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime fechaCreacion;
-    //private Integer cliente_id;
+    private LocalDateTime fecha;
     private String usuario;
+    private String tipo;
 }

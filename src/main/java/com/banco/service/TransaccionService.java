@@ -1,8 +1,9 @@
 package com.banco.service;
 
-import com.banco.dto.ClienteDTO;
+//import com.banco.dto.ClienteDTO;
 import com.banco.dto.TransaccionDTO;
-import com.banco.entity.Cliente;
+//import com.banco.entity.Cliente;
+import com.banco.dto.TransaccionMovimientoDTO;
 import com.banco.entity.Transaccion;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,15 @@ import java.util.List;
 
 @Service
 public interface TransaccionService {
-    List<Transaccion> findAll();
+    List<TransaccionDTO> findAll();
 
-    ResponseEntity<Transaccion> findById(@PathVariable Integer id);
+    ResponseEntity<TransaccionDTO> findById(@PathVariable Integer id);
 
     ResponseEntity<TransaccionDTO> create(@RequestBody TransaccionDTO transaccion);
+
+    ResponseEntity<TransaccionMovimientoDTO> ingreso(@PathVariable Integer id, @RequestBody Double cantidad);
+
+    ResponseEntity<TransaccionMovimientoDTO> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
 
     ResponseEntity<Transaccion> update(@PathVariable Integer id, @RequestBody Transaccion transaccion);
 

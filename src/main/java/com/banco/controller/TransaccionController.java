@@ -1,6 +1,8 @@
 package com.banco.controller;
 
+import com.banco.dto.CuentaDTO;
 import com.banco.dto.TransaccionDTO;
+import com.banco.dto.TransaccionMovimientoDTO;
 import com.banco.entity.Transaccion;
 import com.banco.service.TransaccionService;
 import org.apache.coyote.Response;
@@ -18,17 +20,28 @@ public class TransaccionController {
     private TransaccionService transaccionService;
 
     @GetMapping("")
-    public List<Transaccion> findAll(){
+    public List<TransaccionDTO> findAll(){
         return transaccionService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaccion> findById(@PathVariable Integer id){
+    public ResponseEntity<TransaccionDTO> findById(@PathVariable Integer id){
         return transaccionService.findById(id);
     }
     @PostMapping("/crear")
     public ResponseEntity<TransaccionDTO> create(@Valid @RequestBody TransaccionDTO transaccion){
         return transaccionService.create(transaccion);
     }
+
+    @PutMapping("ingresar/{id}")
+    public ResponseEntity<TransaccionMovimientoDTO> ingreso(@PathVariable Integer id, @RequestBody CuentaDTO cuenta){
+        return transaccionService.ingreso(id, cuenta.getCantidad());
+    }
+
+    @PutMapping("retirar/{id}")
+    public ResponseEntity<TransaccionMovimientoDTO> retirar(@PathVariable Integer id, @RequestBody CuentaDTO cuenta){
+        return transaccionService.retirar(id, cuenta.getCantidad());
+    }
+
 }
 
