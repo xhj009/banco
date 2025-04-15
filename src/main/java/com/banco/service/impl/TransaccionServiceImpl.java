@@ -115,7 +115,13 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     @Override
     public ResponseEntity<TransaccionMovimientoDTO> ingreso(Integer id, Double cantidad) {
-        Cuenta cuenta = cuentaRepository.findById(id).orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
+
+        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
+        if (!existe){
+            return new ResponseEntity(new Mensaje("La cuenta no existe"),HttpStatus.NOT_FOUND);
+        }
+
+        Cuenta cuenta = cuentaRepository.findById(id).get();
         cuenta.setCantidad(cuenta.getCantidad() + cantidad);
         cuentaRepository.save(cuenta);
 
@@ -133,7 +139,13 @@ public class TransaccionServiceImpl implements TransaccionService {
 
     @Override
     public ResponseEntity<TransaccionMovimientoDTO> retirar(Integer id, Double cantidad) {
-        Cuenta cuenta = cuentaRepository.findById(id).orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
+
+        boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
+        if (!existe){
+            return new ResponseEntity(new Mensaje("La cuenta no existe"),HttpStatus.NOT_FOUND);
+        }
+
+        Cuenta cuenta = cuentaRepository.findById(id).get();
         cuenta.setCantidad(cuenta.getCantidad() - cantidad);
         cuentaRepository.save(cuenta);
 
