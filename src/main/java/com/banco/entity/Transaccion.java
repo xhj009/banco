@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Data
@@ -24,7 +25,7 @@ public class Transaccion {
     private String cuentaDestino;
     private Double cantidad;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime fecha;
+    private OffsetDateTime fecha;
     private String usuario;
     private String tipo;
 }

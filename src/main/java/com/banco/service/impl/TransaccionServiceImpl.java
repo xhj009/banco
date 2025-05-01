@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -89,7 +90,9 @@ public class TransaccionServiceImpl implements TransaccionService {
         transaccion.setCuentaDestino(cuentaDestino.getNumeroCuenta());
         transaccion.setCantidad(transaccionDTO.getCantidad()); // Establecer la cantidad de la transacción
         transaccion.setUsuario(obtenerUsuario.usuario()); // Usuario actual
-        transaccion.setFecha(LocalDateTime.now()); // Fecha de la transacción
+       //transaccion.setFecha(LocalDateTime.now()); // Fecha de la transacción
+        transaccion.setFecha(OffsetDateTime.now());
+        transaccion.setTipo("Transaccion");
 
         // Paso 4: Actualizar las cuentas
         // Descontar de la cuenta origen
@@ -114,7 +117,7 @@ public class TransaccionServiceImpl implements TransaccionService {
     }
 
     @Override
-    public ResponseEntity<TransaccionMovimientoDTO> ingreso(Integer id, Double cantidad) {
+    public ResponseEntity<TransaccionDTO> ingreso(Integer id, Double cantidad) {
 
         boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
         if (!existe){
@@ -128,17 +131,17 @@ public class TransaccionServiceImpl implements TransaccionService {
         Transaccion transaccion = new Transaccion();
         transaccion.setTipo("Ingreso");
         transaccion.setCantidad(cantidad);
-        transaccion.setFecha(LocalDateTime.now());
+        transaccion.setFecha(OffsetDateTime.now());
         transaccion.setCuentaOrigen(cuenta);
         transaccion.setUsuario(obtenerUsuario.usuario());
         transaccionRepository.save(transaccion);
 
-        TransaccionMovimientoDTO dto = modelMapper.map(transaccion,TransaccionMovimientoDTO.class);
+        TransaccionDTO dto = modelMapper.map(transaccion,TransaccionDTO.class);
         return ResponseEntity.ok(dto);
     }
 
     @Override
-    public ResponseEntity<TransaccionMovimientoDTO> retirar(Integer id, Double cantidad) {
+    public ResponseEntity<TransaccionDTO> retirar(Integer id, Double cantidad) {
 
         boolean existe = cuentaRepository.existsByUsuarioAndId(obtenerUsuario.usuario(),id);
         if (!existe){
@@ -152,12 +155,12 @@ public class TransaccionServiceImpl implements TransaccionService {
         Transaccion transaccion = new Transaccion();
         transaccion.setTipo("Retirar");
         transaccion.setCantidad(cantidad);
-        transaccion.setFecha(LocalDateTime.now());
+        transaccion.setFecha(OffsetDateTime.now());
         transaccion.setCuentaOrigen(cuenta);
         transaccion.setUsuario(obtenerUsuario.usuario());
         transaccionRepository.save(transaccion);
 
-        TransaccionMovimientoDTO dto = modelMapper.map(transaccion,TransaccionMovimientoDTO.class);
+        TransaccionDTO dto = modelMapper.map(transaccion,TransaccionDTO.class);
         return ResponseEntity.ok(dto);
     }
 

@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/transaccion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransaccionController {
     @Autowired
     private TransaccionService transaccionService;
@@ -34,12 +35,12 @@ public class TransaccionController {
     }
 
     @PutMapping("ingresar/{id}")
-    public ResponseEntity<TransaccionMovimientoDTO> ingreso(@PathVariable Integer id, @RequestBody CuentaDTO cuenta){
+    public ResponseEntity<TransaccionDTO> ingreso(@PathVariable Integer id, @RequestBody CuentaDTO cuenta){
         return transaccionService.ingreso(id, cuenta.getCantidad());
     }
 
     @PutMapping("retirar/{id}")
-    public ResponseEntity<TransaccionMovimientoDTO> retirar(@PathVariable Integer id, @RequestBody CuentaDTO cuenta){
+    public ResponseEntity<TransaccionDTO> retirar(@PathVariable Integer id, @RequestBody CuentaDTO cuenta){
         return transaccionService.retirar(id, cuenta.getCantidad());
     }
 

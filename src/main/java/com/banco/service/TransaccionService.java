@@ -20,9 +20,9 @@ public interface TransaccionService {
 
     ResponseEntity<TransaccionDTO> create(@RequestBody TransaccionDTO transaccion);
 
-    ResponseEntity<TransaccionMovimientoDTO> ingreso(@PathVariable Integer id, @RequestBody Double cantidad);
+    ResponseEntity<TransaccionDTO> ingreso(@PathVariable Integer id, @RequestBody Double cantidad);
 
-    ResponseEntity<TransaccionMovimientoDTO> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
+    ResponseEntity<TransaccionDTO> retirar(@PathVariable Integer id, @RequestBody Double cantidad);
 
     ResponseEntity<Transaccion> update(@PathVariable Integer id, @RequestBody Transaccion transaccion);
 

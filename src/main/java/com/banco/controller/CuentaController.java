@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cuenta")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class CuentaController {
     @Autowired
     private CuentaService cuentaService;
@@ -25,10 +26,10 @@ public class CuentaController {
         return cuentaService.findById(id);
     }
 
-//    @PostMapping("/crear")
-//    public ResponseEntity<CuentaDTO> save(@Valid @RequestBody CuentaDTO cuenta){
-//        return cuentaService.save(cuenta);
-//    }
+    @PostMapping("/crear")
+    public ResponseEntity<CuentaDTO> save(@Valid @RequestBody CuentaDTO cuenta){
+        return cuentaService.save(cuenta);
+    }
 //
 //    @PutMapping("/depositar/{id}")
 //    public ResponseEntity<CuentaDTO> depositar(@PathVariable Integer id,@Valid @RequestBody CuentaDTO cuenta){

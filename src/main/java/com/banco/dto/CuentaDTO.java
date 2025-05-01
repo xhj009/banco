@@ -15,6 +15,7 @@ public class CuentaDTO {
     private double cantidad;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaCreacion;
-    //private Integer cliente_id;
     private String usuario;
+    //private Integer cliente_id;
+
 }

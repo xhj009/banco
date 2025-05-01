@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.stream.Collectors;
 
 @Data
@@ -24,10 +25,12 @@ public class TransaccionDTO {
     private String cuentaDestino;
     @Min(0)
     private Double cantidad;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime fecha;
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+//    private LocalDateTime fecha;
+    private OffsetDateTime fecha;
     private String usuario;
-    //private String tipo;
+    private String tipo;
 
 //    public TransaccionDTO(Transaccion t) {
 //        this.id = t.getId();
